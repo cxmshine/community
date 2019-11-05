@@ -15,7 +15,7 @@ public class User {
     private String email;
     private int type;
     private int status;
-    private String acticationCode;
+    private String activationCode;
     private String headerUrl;
     private Date createTime;
 
@@ -75,12 +75,12 @@ public class User {
         this.status = status;
     }
 
-    public String getActicationCode() {
-        return acticationCode;
+    public String getActivationCode() {
+        return activationCode;
     }
 
-    public void setActicationCode(String acticationCode) {
-        this.acticationCode = acticationCode;
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public String getHeaderUrl() {
@@ -102,7 +102,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", salt='"
-            + salt + '\'' + ", email='" + email + '\'' + ", type=" + type + ", status=" + status + ", acticationCode='"
-            + acticationCode + '\'' + ", headerUrl='" + headerUrl + '\'' + ", createTime=" + createTime + '}';
+            + salt + '\'' + ", email='" + email + '\'' + ", type=" + type + ", status=" + status + ", activationCode='"
+            + activationCode + '\'' + ", headerUrl='" + headerUrl + '\'' + ", createTime=" + createTime + '}';
     }
 }
