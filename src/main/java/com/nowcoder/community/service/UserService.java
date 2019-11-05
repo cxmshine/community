@@ -178,4 +178,8 @@ public class UserService implements CommunityConstant {
         // 用户退出登录态,则status置为1
         loginTicketMapper.updateStatus(ticket, 1);
     }
+
+    public LoginTicket findLoginTicket(String ticket) {
+        return loginTicketMapper.selectByTicket(ticket);
+    }
 }

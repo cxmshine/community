@@ -41,12 +41,12 @@ public class LoginController implements CommunityConstant {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    @RequestMapping(path = "register", method = RequestMethod.GET)
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
     public String getRegisterPage() {
         return "/site/register";
     }
 
-    @RequestMapping(path = "login", method = RequestMethod.GET)
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String getLoginPage() {
         return "/site/login";
     }
