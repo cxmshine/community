@@ -1,5 +1,7 @@
 package com.nowcoder.community.util;
 
+import com.alibaba.fastjson.JSONObject;
+import java.util.Map;
 import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
@@ -28,4 +30,34 @@ public class CommunityUtil {
         }
         return DigestUtils.md5DigestAsHex(key.getBytes());
     }
+
+    /**
+     * JSONObject转为JSONString
+     * @param code 状态码
+     * @param msg 提示信息
+     * @param map 附加信息(业务数据)
+     * @return
+     */
+    public static String getJSONString(int code, String msg, Map<String, Object> map) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", code);
+        jsonObject.put("msg", msg);
+        if (map != null) {
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                jsonObject.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return jsonObject.toJSONString();
+    }
+    /** 方法重载 */
+    public static String getJSONString(int code, String msg) {
+        return getJSONString(code, msg, null);
+    }
+    /** 方法重载 */
+    public static String getJSONString(int code) {
+        return getJSONString(code, null, null);
+    }
+
+
+
 }
