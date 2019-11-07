@@ -102,7 +102,7 @@ public class DiscussPostController implements CommunityConstant {
                 // 回复列表
                 List<Comment> replyList = commentService
                     .findCommentsByEntity(ENTITY_TYPE_COMMENT, comment.getId(), 0, Integer.MAX_VALUE);// 回复不进行分页
-                // 回复VO列表 (回复VO = 回复 + 发表回复的用户 + 被回复的用户)
+                // 回复VO列表 (回复VO = 回复 + 发表回复的用户 [+ 被回复的用户])
                 List<Map<String, Object>> replyVoList = new ArrayList<>();
                 if (replyList != null) {
                     for (Comment reply : replyList) {
