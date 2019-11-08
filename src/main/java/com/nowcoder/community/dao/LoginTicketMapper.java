@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
  * @Date 2019/11/5 15:33
  */
 @Mapper
+@Deprecated /** 后期在优化登录模块时,改用Redis存放登录凭证 */
 public interface LoginTicketMapper {
     @Insert({
         "insert into login_ticket(user_id,ticket,status,expired) ",
