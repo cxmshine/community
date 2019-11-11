@@ -59,6 +59,18 @@ public class CommentController implements CommunityConstant {
         }
         eventProducer.fireEvent(event);
 
+        // 如果是对帖子发布评论(而不是对回复发布评论)
+        // 涉及到Elasticsearch的内容
+        if (comment.getEntityType() == ENTITY_TYPE_POST) {
+            // 触发发帖事件 (实际上是更新)
+            event = new Event()
+                .setTopic(TOPIC_PUBLISH)
+                .setUserId(comment.getUserId())
+                .setEntityType(ENTITY_TYPE_POST)
+                .setEntityId(discussPostId);
+            eventProducer.fireEvent(event);
+        }
+
         // 评论发布完成后,重定向到帖子详情页
         return "redirect:/discuss/detail/" + discussPostId;
     }
