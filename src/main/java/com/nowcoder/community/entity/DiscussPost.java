@@ -25,7 +25,7 @@ public class DiscussPost {
     /** 帖子的类型,0表示普通帖,1表示置顶 */
     @Field(type = FieldType.Integer)
     private int type;
-    /** 帖子的状态,0表示普通,1表示精华,2表示拉黑 */
+    /** 帖子的状态,0表示普通,1表示精华,2表示拉黑(删除) */
     @Field(type = FieldType.Integer)
     private int status;
     @Field(type = FieldType.Date)

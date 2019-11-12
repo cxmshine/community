@@ -170,4 +170,57 @@ public class DiscussPostController implements CommunityConstant {
         model.addAttribute("comments", commentVoList);
         return "/site/discuss-detail";
     }
+
+    // 设置帖子置顶
+    @RequestMapping(path = "/top", method = RequestMethod.POST)
+    @ResponseBody
+    public String setTop(int id) {
+        discussPostService.updateType(id, 1);
+
+        // (版主)触发发帖事件以更新es
+        Event event = new Event()
+            .setTopic(TOPIC_PUBLISH)
+            .setUserId(hostHolder.getUser().getId())
+            .setEntityType(ENTITY_TYPE_POST)
+            .setEntityId(id);
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
+    // (版主)给帖子加精(华)
+    @RequestMapping(path = "/wonderful", method = RequestMethod.POST)
+    @ResponseBody
+    public String setWonderful(int id) {
+        discussPostService.updateStatus(id, 1);
+
+        // 触发发帖事件以更新es
+        Event event = new Event()
+            .setTopic(TOPIC_PUBLISH)
+            .setUserId(hostHolder.getUser().getId())
+            .setEntityType(ENTITY_TYPE_POST)
+            .setEntityId(id);
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
+    // 管理员删帖
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String setDelete(int id) {
+        discussPostService.updateStatus(id, 2);
+
+        // 触发删帖事件以将相应内容从es中删除
+        Event event = new Event()
+            .setTopic(TOPIC_DELETE)
+            .setUserId(hostHolder.getUser().getId())
+            .setEntityType(ENTITY_TYPE_POST)
+            .setEntityId(id);
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+
+    }
+
 }
