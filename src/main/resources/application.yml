@@ -63,6 +63,11 @@ spring:
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 5
+  # TaskSchedulingProperties
+  task:
+    scheduling:
+      pool:
+        size: 5
 
 # MybatisProperties
 mybatis:
