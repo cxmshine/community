@@ -47,6 +47,22 @@ spring:
     elasticsearch:
       cluster-name: nowcoder
       cluster-nodes: 127.0.0.1:9300
+  # QuartzProperties
+  quartz:
+    job-store-type: jdbc
+    scheduler-name: communityScheduler
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            isClustered: true
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 5
 
 # MybatisProperties
 mybatis:

@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface DiscussPostMapper {
-    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit);
+    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit, int orderMode);
 
     /**
      * 统计行数 (分页逻辑需要)
@@ -29,4 +29,6 @@ public interface DiscussPostMapper {
     int updateType(int id, int type);
 
     int updateStatus(int id, int status);
+
+    int updateScore(int id, double score);
 }
