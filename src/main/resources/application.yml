@@ -98,3 +98,14 @@ qiniu:
     share:
       name: tshare
       url: http://q0w9a0av1.bkt.clouddn.com
+# caffeine
+caffeine:
+  posts:
+    max-size: 15
+    expire-seconds: 180
+# logger
+#logging:
+#  level:
+#    com:
+#      nowcoder:
+#        community: debug
