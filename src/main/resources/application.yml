@@ -76,4 +76,8 @@ community:
   path:
     domain: http://localhost:8080
     upload: d:/work/data/upload
-
+# wk
+wk:
+  image:
+    command: d:/wkhtmltox-0.12.5-1/wkhtmltopdf/bin/wkhtmltoimage
+    storage: d:/work/data/wk-images
