@@ -11,8 +11,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/community?characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
-    username: root
-    password: 123
+    username: xxxxxxxxxxxx
+    password: xxxxxxxxxxxx
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       maximum-pool-size: 15
@@ -109,3 +109,11 @@ caffeine:
 #    com:
 #      nowcoder:
 #        community: debug
+
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: info,caches
+        include: "*"
