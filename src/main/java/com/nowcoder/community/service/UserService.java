@@ -271,4 +271,40 @@ public class UserService implements CommunityConstant {
         });
         return list;
     }
+
+    /** 修改密码 */
+    public Map<String, Object> updatePassword(int userId, String oldPassword,
+                                              String newPassword, String confirmPassword) {
+        Map<String, Object> map = new HashMap<>();
+        // 空值处理 (舍弃,因为前端已经有做required要求,若某处内容为空,无法提交)
+//        if (StringUtils.isBlank(oldPassword)) {
+//            map.put("oldPasswordMsg", "原密码不能为空!");
+//            return map;
+//        }
+//        if (StringUtils.isBlank(newPassword)) {
+//            map.put("newPasswordMsg", "新密码不能为空!");
+//            return map;
+//        }
+//        if (StringUtils.isBlank(confirmPassword)) {
+//            map.put("confirmPasswordMsg", "确认密码不能为空!");
+//            return map;
+//        }
+        User user = userMapper.selectById(userId);
+        // 验证用户输入的原密码是否正确
+        oldPassword = CommunityUtil.md5(oldPassword + user.getSalt());
+        if (!user.getPassword().equals(oldPassword)) {
+            map.put("oldPasswordMsg", "原密码错误!");
+            return map;
+        }
+        // 验证用户两次输入的密码是否一致
+        if (!confirmPassword.equals(newPassword)) {
+            map.put("confirmPasswordMsg", "两次输入的密码不一致!");
+            return map;
+        }
+        // 不应该直接将用户的newPassword存入数据库,存入数据库的应该是经过md5加密的密码
+        // userMapper.updatePassword(userId, newPassword);
+        newPassword = CommunityUtil.md5(newPassword + user.getSalt());
+        userMapper.updatePassword(userId, newPassword);
+        return map;
+    }
 }

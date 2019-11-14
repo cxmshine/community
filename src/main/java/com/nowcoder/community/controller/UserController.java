@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -193,5 +194,36 @@ public class UserController implements CommunityConstant {
         model.addAttribute("hasFollowed", hasFollowed);
 
         return "/site/profile";
+    }
+
+    /**
+     * 修改密码
+     * @param model
+     * @param oldPassword       原密码
+     * @param newPassword       新密码
+     * @param confirmPassword   确认密码
+     * @return
+     */
+    @RequestMapping(path = "/update/password", method = RequestMethod.POST)
+    public String updatePassword(Model model, String oldPassword,
+                                 String newPassword, String confirmPassword) {
+        // 获得当前登录的用户
+        User user = hostHolder.getUser();
+        Map<String, Object> map = userService.updatePassword(user.getId(), oldPassword, newPassword, confirmPassword);
+        // map中存放的是错误信息,若map为null或者为空,则更新密码成功
+        if (map == null || map.isEmpty()) {
+            model.addAttribute("msg", "修改密码成功!");
+            model.addAttribute("target", "/index");
+            return "/site/operate-result";
+        } else {
+            // 将各种信息都回传
+            model.addAttribute("oldPasswordMsg", map.get("oldPasswordMsg"));
+            model.addAttribute("newPasswordMsg", map.get("newPasswordMsg"));
+            model.addAttribute("confirmPasswordMsg", map.get("confirmPasswordMsg"));
+            // 为了做页面回显,将原密码回传
+            model.addAttribute("oldPassword", oldPassword);
+            // 继续回到 账号设置 页
+            return "/site/setting";
+        }
     }
 }
