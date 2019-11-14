@@ -103,7 +103,7 @@ caffeine:
   posts:
     max-size: 15
     expire-seconds: 180
-# logger
+# logger 不再启用,改为logback-spring.xml的形式
 #logging:
 #  level:
 #    com:
