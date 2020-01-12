@@ -13,7 +13,7 @@
   <select id="selectDiscussPosts" resultType="com.nowcoder.community.entity.DiscussPost">
     select <include refid="selectFields"></include>
     from discuss_post
-    <!-- status为2表示拉黑,拉黑贴不展示出来 -->
+    <!-- status为2表示拉黑,拉黑帖不展示出来 -->
     where status!=2
     <!-- 当userId为0时,展示所有;否则就是只展示某个用户的帖子 -->
     <if test="userId!=0">
